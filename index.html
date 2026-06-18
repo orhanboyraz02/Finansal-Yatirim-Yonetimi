@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yatırım AI | FİNANSAL YATIRIM YÖNETİM PLATFORMU</title>
+    <title>Yatırım AI Platformu</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -12,57 +12,41 @@
         body { background: linear-gradient(135deg, #0a0f2c 0%, #12173f 100%); min-height: 100vh; margin: 0; padding: 0; }
         .text-gold { color: #f5b042 !important; }
         .bg-gold { background: #f5b042; }
-        .btn-gold { background: #f5b042; color: #0a0f2c; font-weight: bold; padding: 10px 24px; border-radius: 12px; cursor: pointer; border: none; display: inline-block; text-align: center; transition: 0.2s; }
-        .btn-gold:hover { opacity: 0.9; transform: scale(1.02); }
+        .btn-gold { background: #f5b042; color: #0a0f2c; font-weight: bold; padding: 8px 20px; border-radius: 12px; cursor: pointer; border: none; display: inline-block; text-align: center; }
+        .btn-gold:hover { opacity: 0.9; }
         .card { background: rgba(18, 23, 63, 0.95); border-radius: 20px; padding: 20px; margin-bottom: 20px; border: 1px solid #1e2556; }
         .sidebar { position: fixed; left: 0; top: 0; width: 260px; height: 100%; background: #0a0f2c; padding: 20px; border-right: 1px solid #1e2556; overflow-y: auto; z-index: 100; }
         .main { margin-left: 260px; padding: 20px; }
-        .menu-item { padding: 12px 15px; margin: 5px 0; border-radius: 12px; cursor: pointer; color: #9ca3af; display: flex; align-items: center; gap: 12px; transition: 0.2s; }
+        .menu-item { padding: 12px 15px; margin: 5px 0; border-radius: 12px; cursor: pointer; color: #9ca3af; display: flex; align-items: center; gap: 12px; }
         .menu-item:hover { background: rgba(245,176,66,0.15); color: #f5b042; }
         .menu-active { background: #f5b042; color: #0a0f2c; }
-        .menu-active i, .menu-active span { color: #0a0f2c; }
         input, select { background: #0f1338; border: 1px solid #1e2556; color: white; border-radius: 12px; padding: 10px; width: 100%; margin-bottom: 10px; }
-        input:focus, select:focus { outline: none; border-color: #f5b042; }
         table { width: 100%; border-collapse: collapse; }
         th, td { padding: 12px; text-align: left; border-bottom: 1px solid #1e2556; }
         .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 1000; }
         .modal-content { background: #12173f; border-radius: 20px; padding: 30px; max-width: 500px; width: 90%; border: 1px solid #f5b042; }
-        .footer { text-align: center; padding: 20px; margin-top: 30px; border-top: 1px solid #1e2556; color: #9ca3af; font-size: 12px; }
-        .signal-buy { background: #10b98120; border-left: 4px solid #10b981; padding: 15px; border-radius: 12px; margin-bottom: 15px; }
-        .signal-sell { background: #ef444420; border-left: 4px solid #ef4444; padding: 15px; border-radius: 12px; margin-bottom: 15px; }
-        .signal-hold { background: #6b728020; border-left: 4px solid #f5b042; padding: 15px; border-radius: 12px; margin-bottom: 15px; }
+        .footer { text-align: center; padding: 20px; margin-top: 30px; border-top: 1px solid #1e2556; color: #6b7280; font-size: 12px; }
+        .signal-buy { background: #10b98120; border-left: 4px solid #10b981; padding: 15px; border-radius: 12px; }
+        .signal-sell { background: #ef444420; border-left: 4px solid #ef4444; padding: 15px; border-radius: 12px; }
+        .signal-hold { background: #6b728020; border-left: 4px solid #f5b042; padding: 15px; border-radius: 12px; }
         .alert-danger { background: #ef444420; border-left: 4px solid #ef4444; padding: 12px; border-radius: 12px; margin-bottom: 12px; }
         .metric-card { text-align: center; padding: 1rem; background: rgba(0,0,0,0.2); border-radius: 1rem; }
-        .white-text { color: white !important; }
-        .text-sm { font-size: 13px; }
-        .text-xs { font-size: 11px; }
-        h1, h2, h3, h4, .gold-text { color: #f5b042 !important; }
-        p, span, td, th, label, .white-text { color: white !important; }
-        .text-gray { color: #9ca3af !important; }
     </style>
 </head>
 <body>
-
 <div id="app"></div>
-
 <script>
-    // ============================================================
-    // 1. KULLANICI VERİTABANI
-    // ============================================================
+    // ============ KULLANICILAR ============
     let users = [
         { id: 1, email: "admin@finans.com", password: "Admin123!", name: "Orhan BOYRAZ", role: "admin", subscription: "premium" },
-        { id: 2, email: "demo@finans.com", password: "demo123", name: "Demo Kullanıcı", role: "user", subscription: "basic" },
-        { id: 3, email: "mehmet@finans.com", password: "mehmet123", name: "Mehmet Demir", role: "user", subscription: "basic" },
-        { id: 4, email: "ayse@finans.com", password: "ayse123", name: "Ayse Yılmaz", role: "user", subscription: "basic" }
+        { id: 2, email: "demo@finans.com", password: "demo123", name: "Demo Kullanıcı", role: "user", subscription: "basic" }
     ];
     
     let currentUser = null;
     let currentPage = "overview";
     let isAdmin = false;
     
-    // ============================================================
-    // 2. 12 VARLIK (Admin ekleyip silebilir)
-    // ============================================================
+    // ============ 8 VARLIK ============
     let assets = [
         { id: 1, name: "ALTIN", symbol: "XAUUSD", price: 3365, change: "+1.2%", rsi: 62, confidence: 87, trend: "↑", volume: 12450 },
         { id: 2, name: "GÜMÜŞ", symbol: "XAGUSD", price: 31.2, change: "+0.8%", rsi: 58, confidence: 74, trend: "↑", volume: 8900 },
@@ -71,16 +55,10 @@
         { id: 5, name: "BITCOIN", symbol: "BTC", price: 68500, change: "+2.1%", rsi: 71, confidence: 68, trend: "↑", volume: 12300 },
         { id: 6, name: "DOLAR", symbol: "DXY", price: 104.2, change: "-0.2%", rsi: 48, confidence: 52, trend: "↓", volume: 56700 },
         { id: 7, name: "HAM PETROL", symbol: "WTI", price: 78.5, change: "+0.3%", rsi: 55, confidence: 61, trend: "↑", volume: 23400 },
-        { id: 8, name: "DOĞALGAZ", symbol: "NG", price: 2.85, change: "-1.2%", rsi: 38, confidence: 43, trend: "↓", volume: 8900 },
-        { id: 9, name: "EUROBOND", symbol: "EUROBND", price: 1.085, change: "+0.2%", rsi: 52, confidence: 56, trend: "↑", volume: 34500 },
-        { id: 10, name: "NASDAQ", symbol: "NDX", price: 18500, change: "+0.7%", rsi: 61, confidence: 73, trend: "↑", volume: 18700 },
-        { id: 11, name: "RUSYA 100", symbol: "IMOEX", price: 3200, change: "-0.5%", rsi: 44, confidence: 41, trend: "↓", volume: 6700 },
-        { id: 12, name: "ÇİN 50", symbol: "SSE", price: 3500, change: "+0.9%", rsi: 59, confidence: 66, trend: "↑", volume: 8900 }
+        { id: 8, name: "DOĞALGAZ", symbol: "NG", price: 2.85, change: "-1.2%", rsi: 38, confidence: 43, trend: "↓", volume: 8900 }
     ];
     
-    // ============================================================
-    // 3. 4 ABONELİK PAKETİ
-    // ============================================================
+    // ============ 4 ABONELİK PAKETİ ============
     const plans = [
         { name: "Basic", price: 199, features: ["3 Varlık Takibi", "Temel Analiz", "Haftalık Rapor"], icon: "fa-user" },
         { name: "Pro", price: 499, features: ["10 Varlık Takibi", "Teknik Analiz", "AI Tahminleri", "Günlük Rapor"], icon: "fa-chart-line" },
@@ -88,60 +66,39 @@
         { name: "Kurumsal", price: 2499, features: ["Özel API", "Dedike Sunucu", "Sınırsız Kullanıcı", "Öncelikli Destek"], icon: "fa-building" }
     ];
     
-    // ============================================================
-    // 4. DİĞER VERİLER
-    // ============================================================
+    // ============ DİĞER VERİLER ============
     let newsList = [
         { title: "Fed faiz kararını açıkladı: Beklendiği gibi sabit kaldı", sentiment: "positive", score: 72, date: "2025-06-15" },
         { title: "Altın rekor seviyeye yaklaştı, güvenli liman talebi artıyor", sentiment: "positive", score: 85, date: "2025-06-14" },
-        { title: "Çin ekonomisi yavaşlıyor, emtia fiyatları baskı altında", sentiment: "negative", score: 35, date: "2025-06-13" },
-        { title: "Bitcoin ETF onayı sonrası kurumlar piyasaya giriyor", sentiment: "positive", score: 78, date: "2025-06-12" },
-        { title: "Avrupa Merkez Bankası faiz indirim sinyali verdi", sentiment: "positive", score: 68, date: "2025-06-11" }
+        { title: "Çin ekonomisi yavaşlıyor, emtia fiyatları baskı altında", sentiment: "negative", score: 35, date: "2025-06-13" }
     ];
     
     let pastSignals = [
         { asset: "ALTIN", signal: "AL", date: "2025-06-10", result: "+3.2%", entry: 3320, exit: 3425 },
         { asset: "BIST", signal: "BEKLE", date: "2025-06-09", result: "0%", entry: 10850, exit: 10850 },
-        { asset: "BITCOIN", signal: "SAT", date: "2025-06-08", result: "-1.5%", entry: 69500, exit: 68450 },
-        { asset: "GÜMÜŞ", signal: "AL", date: "2025-06-07", result: "+0.8%", entry: 30.8, exit: 31.0 }
+        { asset: "BITCOIN", signal: "SAT", date: "2025-06-08", result: "-1.5%", entry: 69500, exit: 68450 }
     ];
     
     let alerts = [
-        { id: 1, type: "warning", title: "Likidite Riski", desc: "Piyasa derinliği azalıyor, volatilite artabilir." },
-        { id: 2, type: "danger", title: "Jeopolitik Risk", desc: "Orta Doğu'da gerilim yükseliyor, petrol fiyatları etkilenebilir." },
-        { id: 3, type: "info", title: "Merkez Bankası", desc: "Fed faiz kararını bu hafta açıklayacak." }
+        { title: "Likidite Riski", desc: "Piyasa derinliği azalıyor, volatilite artabilir." },
+        { title: "Jeopolitik Risk", desc: "Orta Doğu'da gerilim yükseliyor." }
     ];
     
-    let macroData = {
-        inflation: 3.2,
-        fedRate: 5.5,
-        unemployment: 3.8,
-        gdp: 2.1,
-        geopoliticalRisk: "Yüksek"
-    };
-    
+    let macroData = { inflation: 3.2, fedRate: 5.5, unemployment: 3.8, gdp: 2.1, geopoliticalRisk: "Yüksek" };
     let aiForecast = { hour1: 72, hour4: 68, day1: 76, week1: 64, month1: 58 };
     let portfolioAllocation = { gold: 25, stocks: 20, etf: 15, bonds: 15, cash: 10, crypto: 10, alternative: 5 };
     
-    // ============================================================
-    // 5. YARDIMCI FONKSİYONLAR
-    // ============================================================
+    // ============ YARDIMCI ============
     function formatMoney(amount) { return new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(amount); }
     function formatUSD(amount) { return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount); }
     function whatsappLink(text) { window.open(`https://wa.me/905418660202?text=${encodeURIComponent(text)}`, '_blank'); }
     function showToast(msg) { alert(msg); }
     
-    // Yapay Zeka Sinyal Üretme (API entegrasyonu hazır)
     function generateSignal(asset) {
         let rsi = asset.rsi || 50;
-        let trend = asset.trend;
-        // Gerçek API entegrasyonu için bu fonksiyon genişletilebilir
-        // Şu anda mock veri ile çalışıyor
-        if (rsi < 35) return { action: "AL", confidence: 85, entry: asset.price, stop: asset.price * 0.98, target: asset.price * 1.05, riskReward: "1:2.5", reason: "RSI aşırı satım bölgesinde, teknik toparlanma bekleniyor." };
-        if (rsi > 70) return { action: "SAT", confidence: 78, entry: asset.price, stop: asset.price * 1.02, target: asset.price * 0.95, riskReward: "1:2", reason: "RSI aşırı alım bölgesinde, kar realizasyonu gelebilir." };
-        if (trend === "↑") return { action: "AL", confidence: 65, entry: asset.price, stop: asset.price * 0.99, target: asset.price * 1.03, riskReward: "1:3", reason: "Yükseliş trendi devam ediyor, momentum güçlü." };
-        if (trend === "↓") return { action: "SAT", confidence: 60, entry: asset.price, stop: asset.price * 1.01, target: asset.price * 0.98, riskReward: "1:2", reason: "Düşüş trendi devam ediyor, satış baskısı var." };
-        return { action: "BEKLE", confidence: 50, entry: asset.price, stop: null, target: null, riskReward: "-", reason: "Piyasa belirsiz, net sinyal yok." };
+        if (rsi < 35) return { action: "AL", confidence: 85, entry: asset.price, stop: asset.price * 0.98, target: asset.price * 1.05, reason: "RSI aşırı satım" };
+        if (rsi > 70) return { action: "SAT", confidence: 78, entry: asset.price, stop: asset.price * 1.02, target: asset.price * 0.95, reason: "RSI aşırı alım" };
+        return { action: "BEKLE", confidence: 50, entry: asset.price, stop: null, target: null, reason: "Piyasa belirsiz" };
     }
     
     function totalPortfolio() { return assets.reduce((s, a) => s + a.price, 0) * 100; }
@@ -149,36 +106,22 @@
         let avgRsi = assets.reduce((s, a) => s + a.rsi, 0) / assets.length;
         if (avgRsi > 70) return { score: 75, level: "Yüksek Risk" };
         if (avgRsi > 60) return { score: 55, level: "Orta Risk" };
-        if (avgRsi > 40) return { score: 35, level: "Düşük Risk" };
-        return { score: 25, level: "Çok Düşük Risk" };
+        return { score: 35, level: "Düşük Risk" };
     }
     
-    // ============================================================
-    // 6. GİRİŞ / ÇIKIŞ / YÖNETİM
-    // ============================================================
+    // ============ GİRİŞ / YÖNETİM ============
     function handleLogin(email, password) {
         let user = users.find(u => u.email === email && u.password === password);
-        if (user) {
-            currentUser = user;
-            isAdmin = user.role === "admin";
-            localStorage.setItem("user", JSON.stringify(user));
-            render();
-            return true;
-        }
+        if (user) { currentUser = user; isAdmin = user.role === "admin"; localStorage.setItem("user", JSON.stringify(user)); render(); return true; }
         return false;
     }
-    
     function handleLogout() { currentUser = null; isAdmin = false; localStorage.removeItem("user"); render(); }
-    
     function openLoginModal() {
         let email = prompt("E-posta:", "demo@finans.com");
         if (!email) return;
         let password = prompt("Şifre:", "demo123");
-        if (handleLogin(email, password)) {
-            alert("Giriş başarılı!");
-        } else {
-            alert("Hatalı giriş! Admin: admin@finans.com / Admin123!");
-        }
+        if (handleLogin(email, password)) alert("Giriş başarılı!");
+        else alert("Hatalı giriş!");
     }
     
     function addAsset() {
@@ -190,7 +133,6 @@
             render();
         }
     }
-    
     function deleteAsset(id) {
         if (confirm("Silmek istediğinize emin misiniz?")) {
             assets = assets.filter(a => a.id !== id);
@@ -198,400 +140,100 @@
             render();
         }
     }
-    
     function openAdminPanel() {
-        if (!isAdmin) {
-            alert("Yönetici değilsiniz! Admin girişi yapın.");
-            return;
-        }
+        if (!isAdmin) { alert("Yönetici değilsiniz!"); return; }
         let pass = prompt("Yönetici şifresi:");
         if (pass === "admin123") {
-            let action = prompt("1- Varlık Ekle\n2- Varlık Sil\nSeçim:");
+            let action = prompt("1- Varlık Ekle\n2- Varlık Sil");
             if (action === "1") addAsset();
             else if (action === "2") {
                 let list = assets.map((a,i) => `${i+1}- ${a.name}`).join("\n");
                 let idx = prompt("Silinecek varlık numarası:\n" + list);
                 if (idx && assets[idx-1]) deleteAsset(assets[idx-1].id);
             }
-        } else {
-            alert("Şifre yanlış!");
-        }
+        } else alert("Şifre yanlış!");
     }
-    
     function upgradeSubscription(planName) {
         if (currentUser) {
             currentUser.subscription = planName.toLowerCase();
             localStorage.setItem("user", JSON.stringify(currentUser));
             showToast(`✅ Aboneliğiniz ${planName} paketine yükseltildi!`);
             render();
-        } else {
-            alert("Lütfen önce giriş yapın!");
-            openLoginModal();
-        }
+        } else { alert("Lütfen giriş yapın!"); openLoginModal(); }
     }
     
-    // ============================================================
-    // 7. 13 MODÜL (Tam Çalışır)
-    // ============================================================
-    
-    // MODÜL 1: GENEL BAKIŞ
+    // ============ 13 MODÜL ============
     function renderOverview() {
         let goldSignal = generateSignal(assets[0]);
         let risk = calculateRiskScore();
         return `
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 15px; margin-bottom: 20px;">
-                <div class="card" style="text-align: center;">
-                    <p class="text-gray">Toplam Portföy</p>
-                    <h2 style="color:#f5b042; font-size: 28px;">${formatMoney(totalPortfolio())}</h2>
-                    <p style="color:#10b981; font-size:12px;">+%12.4 bu ay</p>
-                </div>
-                <div class="card" style="text-align: center;">
-                    <p class="text-gray">Risk Skoru</p>
-                    <h2 style="color:#f5b042; font-size: 28px;">${risk.score}/100</h2>
-                    <p style="color:#f5b042;">${risk.level}</p>
-                </div>
-                <div class="card" style="text-align: center;">
-                    <p class="text-gray">AI Sinyal</p>
-                    <h2 style="color:#f5b042; font-size: 28px;">${goldSignal.action}</h2>
-                    <p style="color:#10b981;">Güven: ${goldSignal.confidence}%</p>
-                </div>
-                <div class="card" style="text-align: center;">
-                    <p class="text-gray">Abonelik</p>
-                    <h2 style="color:#f5b042; font-size: 24px;">${currentUser?.subscription?.toUpperCase() || "BASIC"}</h2>
-                </div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:15px; margin-bottom:20px;">
+                <div class="card" style="text-align:center;"><p style="color:#9ca3af;">Toplam Portföy</p><h2 style="color:#f5b042;font-size:28px;">${formatMoney(totalPortfolio())}</h2></div>
+                <div class="card" style="text-align:center;"><p style="color:#9ca3af;">Risk Skoru</p><h2 style="color:#f5b042;font-size:28px;">${risk.score}/100</h2><p style="color:#f5b042;">${risk.level}</p></div>
+                <div class="card" style="text-align:center;"><p style="color:#9ca3af;">AI Sinyal</p><h2 style="color:#f5b042;font-size:28px;">${goldSignal.action}</h2><p style="color:#10b981;">Güven: ${goldSignal.confidence}%</p></div>
+                <div class="card" style="text-align:center;"><p style="color:#9ca3af;">Abonelik</p><h2 style="color:#f5b042;font-size:24px;">${currentUser?.subscription?.toUpperCase()||"BASIC"}</h2></div>
             </div>
-            <div class="card">
-                <h3 style="color:#f5b042; font-weight: bold; margin-bottom: 15px;">📈 Öne Çıkan Varlıklar</h3>
-                ${assets.slice(0,6).map(a => `<div style="display:flex; justify-content:space-between; padding:10px; border-bottom:1px solid #1e2556;"><span style="color:white;">${a.name}</span><span style="color:#f5b042;">${formatUSD(a.price)}</span><span style="color:${a.change.includes('+') ? '#10b981' : '#ef4444'}">${a.change}</span></div>`).join('')}
-            </div>
-            <div class="card">
-                <h3 style="color:#f5b042; font-weight: bold; margin-bottom: 15px;">📰 Son Haberler</h3>
-                ${newsList.slice(0,4).map(n => `<div style="display:flex; justify-content:space-between; padding:10px; border-bottom:1px solid #1e2556;"><span style="color:white;">${n.title}</span><span style="color:${n.sentiment === 'positive' ? '#10b981' : '#ef4444'}">${n.sentiment === 'positive' ? 'Olumlu' : 'Olumsuz'}</span></div>`).join('')}
-            </div>
+            <div class="card"><h3 style="color:#f5b042;font-weight:bold;margin-bottom:15px;">📈 Varlık Listesi</h3>${assets.slice(0,4).map(a => `<div style="display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #1e2556;"><span>${a.name}</span><span style="color:#f5b042;">${formatUSD(a.price)}</span><span style="color:${a.change.includes('+')?'#10b981':'#ef4444'}">${a.change}</span></div>`).join('')}</div>
+            <div class="card"><h3 style="color:#f5b042;font-weight:bold;margin-bottom:15px;">📰 Haberler</h3>${newsList.map(n => `<div style="display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #1e2556;"><span>${n.title}</span><span style="color:${n.sentiment==='positive'?'#10b981':'#ef4444'}">${n.sentiment==='positive'?'Olumlu':'Olumsuz'}</span></div>`).join('')}</div>
         `;
     }
     
-    // MODÜL 2: VARLIK İZLEME
     function renderAssets() {
-        return `
-            <div class="card">
-                <h3 style="color:#f5b042; font-weight: bold; margin-bottom: 15px;">📈 Tüm Varlıklar (${assets.length} Adet)</h3>
-                <div style="overflow-x:auto;">
-                    <table>
-                        <thead><tr style="border-bottom:2px solid #1e2556;"><th style="color:#f5b042;">Varlık</th><th style="color:#f5b042;">Sembol</th><th style="color:#f5b042;">Fiyat</th><th style="color:#f5b042;">Değişim</th><th style="color:#f5b042;">RSI</th><th style="color:#f5b042;">Güven</th><th style="color:#f5b042;">Hacim</th></tr></thead>
-                        <tbody>
-                            ${assets.map(a => `<tr><td style="color:white;">${a.name}</td><td style="color:white;">${a.symbol}</td><td style="color:#f5b042;">${formatUSD(a.price)}</td><td style="color:${a.change.includes('+') ? '#10b981' : '#ef4444'}">${a.change}</td><td style="color:white;">${a.rsi}</td><td><div style="width:100%; background:#1e2556; border-radius:10px;"><div style="width:${a.confidence}%; background:#f5b042; height:6px; border-radius:10px;"></div></div><span style="color:white;">${a.confidence}%</span></td><td style="color:white;">${(a.volume/1000).toFixed(0)}K</td></tr>`).join('')}
-                        </tbody>
-                    </table>
-                </div>
-                ${isAdmin ? `<button onclick="openAdminPanel()" class="btn-gold" style="margin-top:15px; width:100%;">+ Varlık Yönetimi</button>` : ''}
-            </div>
-        `;
+        return `<div class="card"><h3 style="color:#f5b042;font-weight:bold;margin-bottom:15px;">📈 Tüm Varlıklar (${assets.length})</h3><div style="overflow-x:auto;"><table><thead><tr style="border-bottom:2px solid #1e2556;"><th style="color:#f5b042;">Varlık</th><th style="color:#f5b042;">Fiyat</th><th style="color:#f5b042;">Değişim</th><th style="color:#f5b042;">RSI</th><th style="color:#f5b042;">Güven</th></tr></thead><tbody>${assets.map(a => `<tr><td>${a.name}</td><td style="color:#f5b042;">${formatUSD(a.price)}</td><td style="color:${a.change.includes('+')?'#10b981':'#ef4444'}">${a.change}</td><td>${a.rsi}</td><td><div style="width:100%;background:#1e2556;border-radius:10px;"><div style="width:${a.confidence}%;background:#f5b042;height:6px;border-radius:10px;"></div></div>${a.confidence}%</td></tr>`).join('')}</tbody></table></div>${isAdmin?`<button onclick="openAdminPanel()" class="btn-gold" style="margin-top:15px;width:100%;">+ Yönetim</button>`:''}</div>`;
     }
     
-    // MODÜL 3: TEKNİK ANALİZ
     function renderTechnical() {
-        setTimeout(() => { let ctx = document.getElementById('techChart')?.getContext('2d'); if(ctx) new Chart(ctx, { type: 'line', data: { labels: ['1G','2G','3G','4G','5G','6G'], datasets: [{ label: 'ALTIN (XAUUSD)', data: [3300,3320,3340,3360,3350,3365], borderColor: '#f5b042', fill: false }] } }); }, 100);
-        return `
-            <div class="card">
-                <h3 style="color:#f5b042; font-weight: bold; margin-bottom: 15px;">📉 Teknik Analiz (ALTIN)</h3>
-                <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:15px;">
-                    ${assets.slice(0,4).map(a => `<div style="background:#0f2c44; padding:15px; border-radius:12px; text-align:center;"><p style="font-weight:bold; color:white;">${a.name}</p><p style="color:white;">RSI: ${a.rsi}</p><p style="color:${a.rsi > 70 ? '#ef4444' : (a.rsi < 30 ? '#10b981' : '#f5b042')};">${a.rsi > 70 ? '🔴 Aşırı Alım' : (a.rsi < 30 ? '🟢 Aşırı Satım' : '⚪ Nötr')}</p><p style="font-size:12px; color:#9ca3af;">Momentum: ${a.trend}</p></div>`).join('')}
-                </div>
-                <canvas id="techChart" height="200"></canvas>
-                <div style="margin-top:15px; background:#0f2c44; padding:15px; border-radius:12px;">
-                    <p style="color:#f5b042;">📊 Teknik Özet: RSI 62 seviyesinde (nötr), EMA20/50 altın kesişim yaptı, yükseliş trendi devam ediyor.</p>
-                </div>
-            </div>
-        `;
+        setTimeout(() => { let ctx = document.getElementById('techChart')?.getContext('2d'); if(ctx) new Chart(ctx, { type: 'line', data: { labels: ['1G','2G','3G','4G','5G','6G'], datasets: [{ label: 'ALTIN', data: [3300,3320,3340,3360,3350,3365], borderColor: '#f5b042', fill: false }] } }); }, 100);
+        return `<div class="card"><h3 style="color:#f5b042;font-weight:bold;margin-bottom:15px;">📉 Teknik Analiz</h3><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px;">${assets.slice(0,4).map(a => `<div style="background:#0f2c44;padding:15px;border-radius:12px;text-align:center;"><p style="font-weight:bold;">${a.name}</p><p>RSI: ${a.rsi}</p><p>${a.rsi>70?'🔴 Aşırı Alım':(a.rsi<30?'🟢 Aşırı Satım':'⚪ Nötr')}</p></div>`).join('')}</div><canvas id="techChart" height="200"></canvas></div>`;
     }
     
-    // MODÜL 4: AI TAHMİNLERİ
     function renderAIForecast() {
-        return `
-            <div class="card">
-                <h3 style="color:#f5b042; font-weight: bold; margin-bottom: 15px;">🤖 AI Yön Tahminleri (ALTIN)</h3>
-                <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-bottom:15px;">
-                    ${Object.entries(aiForecast).map(([k,v]) => `<div style="background:#0f2c44; padding:15px; border-radius:12px; text-align:center;"><p style="color:#9ca3af; font-size:12px;">${k === 'hour1' ? '1 Saat' : k === 'hour4' ? '4 Saat' : k === 'day1' ? '1 Gün' : k === 'week1' ? '1 Hafta' : '1 Ay'}</p><p style="color:#f5b042; font-size:24px; font-weight:bold;">%${v}</p><div style="width:100%; background:#1e2556; border-radius:10px; height:4px;"><div style="width:${v}%; background:#f5b042; height:4px; border-radius:10px;"></div></div><p style="color:#10b981; font-size:12px;">Yükseliş</p></div>`).join('')}
-                </div>
-                <div style="background:#0f2c44; padding:15px; border-radius:12px;">
-                    <p style="color:#f5b042;">🧠 AI Model Yorumu:</p>
-                    <p style="color:#9ca3af; font-size:14px;">XGBoost + LSTM ensemble modeli son 30 günlük verileri analiz etti. Teknik göstergeler ve makro veriler yükselişi destekliyor. Hedef fiyat: 3450$</p>
-                </div>
-            </div>
-        `;
+        return `<div class="card"><h3 style="color:#f5b042;font-weight:bold;margin-bottom:15px;">🤖 AI Tahminleri</h3><div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;">${Object.entries(aiForecast).map(([k,v]) => `<div style="background:#0f2c44;padding:15px;border-radius:12px;text-align:center;"><p style="color:#9ca3af;font-size:12px;">${k==='hour1'?'1 Saat':k==='hour4'?'4 Saat':k==='day1'?'1 Gün':k==='week1'?'1 Hafta':'1 Ay'}</p><p style="color:#f5b042;font-size:24px;font-weight:bold;">%${v}</p></div>`).join('')}</div></div>`;
     }
     
-    // MODÜL 5: AI SİNYALLER
     function renderSignals() {
         let goldSignal = generateSignal(assets[0]);
-        let signalClass = goldSignal.action === "AL" ? "signal-buy" : (goldSignal.action === "SAT" ? "signal-sell" : "signal-hold");
-        return `
-            <div class="card">
-                <h3 style="color:#f5b042; font-weight: bold; margin-bottom: 15px;">📢 AI Sinyaller</h3>
-                <div class="${signalClass}">
-                    <h2 style="font-size:28px; color:white;">${goldSignal.action}</h2>
-                    <p style="color:#f5b042;">Güven Skoru: ${goldSignal.confidence}/100</p>
-                    <p style="color:white;">${goldSignal.reason}</p>
-                    ${goldSignal.action !== "BEKLE" ? `
-                        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:10px;">
-                            <div><p style="color:#9ca3af;">Giriş</p><p style="font-weight:bold; color:#f5b042;">${formatUSD(goldSignal.entry)}</p></div>
-                            <div><p style="color:#9ca3af;">Stop</p><p style="color:#ef4444; font-weight:bold;">${formatUSD(goldSignal.stop)}</p></div>
-                            <div><p style="color:#9ca3af;">Hedef</p><p style="color:#10b981; font-weight:bold;">${formatUSD(goldSignal.target)}</p></div>
-                        </div>
-                        <p style="margin-top:5px; color:white;">Risk/Ödül: ${goldSignal.riskReward}</p>
-                    ` : ''}
-                </div>
-                <h4 style="color:#f5b042; margin-top:15px;">📜 Geçmiş Sinyaller</h4>
-                <div style="overflow-x:auto;">
-                    <table>
-                        <thead><tr style="border-bottom:1px solid #1e2556;"><th style="color:#f5b042;">Tarih</th><th style="color:#f5b042;">Varlık</th><th style="color:#f5b042;">Sinyal</th><th style="color:#f5b042;">Giriş</th><th style="color:#f5b042;">Çıkış</th><th style="color:#f5b042;">Getiri</th></tr></thead>
-                        <tbody>
-                            ${pastSignals.map(s => `<tr><td style="color:white;">${s.date}</td><td style="color:white;">${s.asset}</td><td style="color:${s.signal === 'AL' ? '#10b981' : (s.signal === 'SAT' ? '#ef4444' : '#f5b042')}">${s.signal}</td><td style="color:white;">${formatUSD(s.entry)}</td><td style="color:white;">${formatUSD(s.exit)}</td><td style="color:${s.result.includes('+') ? '#10b981' : '#ef4444'}">${s.result}</td></tr>`).join('')}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        `;
+        let cls = goldSignal.action === "AL" ? "signal-buy" : (goldSignal.action === "SAT" ? "signal-sell" : "signal-hold");
+        return `<div class="card"><h3 style="color:#f5b042;font-weight:bold;margin-bottom:15px;">📢 AI Sinyaller</h3><div class="${cls}"><h2 style="font-size:28px;color:white;">${goldSignal.action}</h2><p style="color:#f5b042;">Güven: ${goldSignal.confidence}%</p><p>${goldSignal.reason}</p>${goldSignal.action!=="BEKLE"?`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px;"><div><p style="color:#9ca3af;">Giriş</p><p style="font-weight:bold;color:#f5b042;">${formatUSD(goldSignal.entry)}</p></div><div><p style="color:#9ca3af;">Stop</p><p style="color:#ef4444;font-weight:bold;">${formatUSD(goldSignal.stop)}</p></div><div><p style="color:#9ca3af;">Hedef</p><p style="color:#10b981;font-weight:bold;">${formatUSD(goldSignal.target)}</p></div></div>`:''}</div><h4 style="color:#f5b042;margin-top:15px;">📜 Geçmiş</h4><table><thead><tr><th style="color:#f5b042;">Tarih</th><th style="color:#f5b042;">Varlık</th><th style="color:#f5b042;">Sinyal</th><th style="color:#f5b042;">Getiri</th></tr></thead><tbody>${pastSignals.map(s => `<tr><td>${s.date}</td><td>${s.asset}</td><td style="color:${s.signal==='AL'?'#10b981':(s.signal==='SAT'?'#ef4444':'#f5b042')}">${s.signal}</td><td style="color:${s.result.includes('+')?'#10b981':'#ef4444'}">${s.result}</td></tr>`).join('')}</tbody></table></div>`;
     }
     
-    // MODÜL 6: RİSK YÖNETİMİ
     function renderRisk() {
         let risk = calculateRiskScore();
-        return `
-            <div class="card">
-                <h3 style="color:#f5b042; font-weight: bold; margin-bottom: 15px;">⚠️ Risk Yönetimi</h3>
-                <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:15px; margin-bottom:15px;">
-                    <div style="background:#0f2c44; padding:15px; border-radius:12px; text-align:center;">
-                        <p style="color:#9ca3af;">Stop Loss Kuralı</p>
-                        <p style="font-weight:bold; color:white;">Sermaye %2'si</p>
-                    </div>
-                    <div style="background:#0f2c44; padding:15px; border-radius:12px; text-align:center;">
-                        <p style="color:#9ca3af;">Risk Skoru</p>
-                        <p style="font-weight:bold; color:#f5b042; font-size:24px;">${risk.score}/100</p>
-                        <p style="color:#f5b042;">${risk.level}</p>
-                    </div>
-                    <div style="background:#0f2c44; padding:15px; border-radius:12px; text-align:center;">
-                        <p style="color:#9ca3af;">Risk/Ödül Oranı</p>
-                        <p style="font-weight:bold; color:white;">1:2.5</p>
-                    </div>
-                </div>
-                <div style="background:#0f2c44; padding:15px; border-radius:12px;">
-                    <p style="color:#f5b042;">📋 Pozisyon Risk Tablosu</p>
-                    <div style="overflow-x:auto; margin-top:10px;">
-                        <table>
-                            <thead><tr><th style="color:#f5b042;">Varlık</th><th style="color:#f5b042;">Önerilen Poz.</th><th style="color:#f5b042;">Stop Loss</th><th style="color:#f5b042;">Risk/Ödül</th></tr></thead>
-                            <tbody>
-                                ${assets.slice(0,4).map(a => { let signal = generateSignal(a); return `<tr><td style="color:white;">${a.name}</td><td style="color:white;">%${Math.floor(Math.random()*5)+1}</td><td style="color:#f5b042;">${formatUSD(a.price * 0.98)}</td><td style="color:white;">1:2.2</td></tr>`; }).join('')}
-                            </tbody>
-                        </table>
-                    </div>
-                    <p style="color:#9ca3af; font-size:12px; margin-top:10px;">⚠️ Tek pozisyonda max sermaye %2'sini riske atmayın.</p>
-                </div>
-            </div>
-        `;
+        return `<div class="card"><h3 style="color:#f5b042;font-weight:bold;margin-bottom:15px;">⚠️ Risk Yönetimi</h3><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:15px;"><div style="background:#0f2c44;padding:15px;border-radius:12px;text-align:center;"><p style="color:#9ca3af;">Stop Loss</p><p style="font-weight:bold;">Sermaye %2'si</p></div><div style="background:#0f2c44;padding:15px;border-radius:12px;text-align:center;"><p style="color:#9ca3af;">Risk Skoru</p><p style="font-weight:bold;color:#f5b042;font-size:24px;">${risk.score}/100</p><p style="color:#f5b042;">${risk.level}</p></div><div style="background:#0f2c44;padding:15px;border-radius:12px;text-align:center;"><p style="color:#9ca3af;">Risk/Ödül</p><p style="font-weight:bold;">1:2.5</p></div></div></div>`;
     }
     
-    // MODÜL 7: PORTFÖY OPTİMİZASYONU
     function renderPortfolio() {
         setTimeout(() => { let ctx = document.getElementById('portfolioChart')?.getContext('2d'); if(ctx) new Chart(ctx, { type: 'doughnut', data: { labels: ['Altın','Hisse','ETF','Tahvil','Nakit','Kripto','Alternatif'], datasets: [{ data: [25,20,15,15,10,10,5], backgroundColor: ['#f5b042','#e09d2c','#d48a1f','#c27818','#b0680d','#a05a10','#904c0a'] }] } }); }, 100);
-        return `
-            <div class="card">
-                <h3 style="color:#f5b042; font-weight: bold; margin-bottom: 15px;">📊 Portföy Optimizasyonu</h3>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
-                    <div><canvas id="portfolioChart" height="250"></canvas></div>
-                    <div>
-                        ${Object.entries(portfolioAllocation).map(([k,v]) => `
-                            <div style="margin-bottom:8px;">
-                                <div style="display:flex; justify-content:space-between;">
-                                    <span style="color:white;">${k === 'gold' ? 'Altın' : k === 'stocks' ? 'Hisse' : k === 'etf' ? 'ETF' : k === 'bonds' ? 'Tahvil' : k === 'cash' ? 'Nakit' : k === 'crypto' ? 'Kripto' : 'Alternatif'}</span>
-                                    <span style="color:#f5b042;">%${v}</span>
-                                </div>
-                                <div style="width:100%; background:#1e2556; border-radius:10px; height:6px;">
-                                    <div style="width:${v}%; background:#f5b042; height:6px; border-radius:10px;"></div>
-                                </div>
-                            </div>
-                        `).join('')}
-                        <p style="color:#9ca3af; font-size:12px; margin-top:10px;">✅ Modern Portfolio Theory (MPT) ile optimize edilmiştir.</p>
-                        <button onclick="showToast('Portföy optimizasyonu yenilendi')" class="btn-gold" style="width:100%; margin-top:10px;">🔄 Portföyü Optimize Et</button>
-                    </div>
-                </div>
-            </div>
-        `;
+        return `<div class="card"><h3 style="color:#f5b042;font-weight:bold;margin-bottom:15px;">📊 Portföy</h3><div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;"><div><canvas id="portfolioChart" height="250"></canvas></div><div>${Object.entries(portfolioAllocation).map(([k,v]) => `<div style="margin-bottom:8px;"><div style="display:flex;justify-content:space-between;"><span>${k==='gold'?'Altın':k==='stocks'?'Hisse':k==='etf'?'ETF':k==='bonds'?'Tahvil':k==='cash'?'Nakit':k==='crypto'?'Kripto':'Alternatif'}</span><span style="color:#f5b042;">%${v}</span></div><div style="width:100%;background:#1e2556;border-radius:10px;height:6px;"><div style="width:${v}%;background:#f5b042;height:6px;border-radius:10px;"></div></div></div>`).join('')}</div></div></div>`;
     }
     
-    // MODÜL 8: ERKEN UYARI
     function renderAlerts() {
-        return `
-            <div class="card">
-                <h3 style="color:#f5b042; font-weight: bold; margin-bottom: 15px;">🚨 Erken Uyarı Sistemi</h3>
-                ${alerts.map(a => `
-                    <div class="alert-danger">
-                        <i class="fas fa-exclamation-triangle" style="color:#f5b042;"></i>
-                        <strong style="color:white;">${a.title}</strong>
-                        <p style="margin-top:5px; color:#9ca3af;">${a.desc}</p>
-                        <span style="color:#9ca3af; font-size:12px;">Risk Seviyesi: ${a.type === 'danger' ? 'Yüksek' : (a.type === 'warning' ? 'Orta' : 'Düşük')}</span>
-                    </div>
-                `).join('')}
-                <div style="background:#f59e0b20; border-left:4px solid #f59e0b; padding:12px; border-radius:12px; margin-top:10px;">
-                    <strong style="color:#f59e0b;">📉 Resesyon Riski</strong>
-                    <p style="color:#9ca3af; font-size:14px;">ABD tahvil getirileri (10Y-2Y) ters dönüş sinyali veriyor. 6-12 ay içinde resesyon olasılığı artıyor.</p>
-                </div>
-            </div>
-        `;
+        return `<div class="card"><h3 style="color:#f5b042;font-weight:bold;margin-bottom:15px;">🚨 Erken Uyarı</h3>${alerts.map(a => `<div class="alert-danger"><strong>${a.title}</strong><p>${a.desc}</p></div>`).join('')}</div>`;
     }
     
-    // MODÜL 9: MAKRO EKONOMİ
     function renderMacro() {
-        return `
-            <div class="card">
-                <h3 style="color:#f5b042; font-weight: bold; margin-bottom: 15px;">🌍 Makro Ekonomi</h3>
-                <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-bottom:15px;">
-                    ${Object.entries(macroData).map(([k,v]) => `
-                        <div style="background:#0f2c44; padding:15px; border-radius:12px; text-align:center;">
-                            <p style="color:#9ca3af; font-size:12px;">${k === 'inflation' ? 'Enflasyon' : k === 'fedRate' ? 'Fed Faiz' : k === 'unemployment' ? 'İşsizlik' : k === 'gdp' ? 'GSYH' : 'Jeopolitik'}</p>
-                            <p style="color:#f5b042; font-size:20px; font-weight:bold;">${v}${typeof v === 'number' ? '%' : ''}</p>
-                            <p style="color:${k === 'geopoliticalRisk' ? '#ef4444' : '#10b981'}; font-size:12px;">${k === 'geopoliticalRisk' ? 'Yüksek Risk' : 'Olumlu'}</p>
-                        </div>
-                    `).join('')}
-                </div>
-                <div style="background:#0f2c44; padding:15px; border-radius:12px;">
-                    <p style="color:#f5b042;">🧠 AI Ekonomist Yorumu:</p>
-                    <p style="color:#9ca3af; font-size:14px;">Enflasyon hedefine yaklaşırken Fed'in Eylül ayında faiz indirimine başlaması bekleniyor. Jeopolitik riskler piyasalarda oynaklığı artırabilir.</p>
-                </div>
-            </div>
-        `;
+        return `<div class="card"><h3 style="color:#f5b042;font-weight:bold;margin-bottom:15px;">🌍 Makro</h3><div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;">${Object.entries(macroData).map(([k,v]) => `<div style="background:#0f2c44;padding:15px;border-radius:12px;text-align:center;"><p style="color:#9ca3af;font-size:12px;">${k==='inflation'?'Enflasyon':k==='fedRate'?'Fed Faiz':k==='unemployment'?'İşsizlik':k==='gdp'?'GSYH':'Jeopolitik'}</p><p style="color:#f5b042;font-size:20px;font-weight:bold;">${v}${typeof v==='number'?'%':''}</p></div>`).join('')}</div></div>`;
     }
     
-    // MODÜL 10: HABER & DUYGU
     function renderNews() {
         let avg = newsList.reduce((s,n) => s + n.score, 0) / newsList.length;
-        return `
-            <div class="card">
-                <h3 style="color:#f5b042; font-weight: bold; margin-bottom: 15px;">📰 Haber & Duygu Analizi</h3>
-                ${newsList.map(n => `
-                    <div style="display:flex; justify-content:space-between; align-items:center; padding:10px; border-bottom:1px solid #1e2556;">
-                        <div>
-                            <p style="font-weight:500; color:white;">${n.title}</p>
-                            <div style="display:flex; gap:10px; margin-top:5px;">
-                                <span style="color:#9ca3af; font-size:12px;">${n.date}</span>
-                                <span style="color:${n.sentiment === 'positive' ? '#10b981' : '#ef4444'}; font-size:12px;">${n.sentiment === 'positive' ? 'Olumlu' : 'Olumsuz'}</span>
-                                <span style="color:#9ca3af; font-size:12px;">Skor: ${n.score}</span>
-                            </div>
-                        </div>
-                        <i class="fas ${n.sentiment === 'positive' ? 'fa-smile' : 'fa-frown'}" style="color:${n.sentiment === 'positive' ? '#10b981' : '#ef4444'}; font-size:24px;"></i>
-                    </div>
-                `).join('')}
-                <div style="margin-top:15px; background:#0f2c44; padding:15px; border-radius:12px;">
-                    <p style="color:#f5b042;">📊 Genel Piyasa Duygusu: <strong style="font-size:18px; color:#f5b042;">%${Math.round(avg)} Olumlu</strong></p>
-                    <div style="width:100%; background:#1e2556; border-radius:10px; height:6px; margin-top:5px;">
-                        <div style="width:${avg}%; background:#f5b042; height:6px; border-radius:10px;"></div>
-                    </div>
-                </div>
-            </div>
-        `;
+        return `<div class="card"><h3 style="color:#f5b042;font-weight:bold;margin-bottom:15px;">📰 Duygu Analizi</h3>${newsList.map(n => `<div style="display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #1e2556;"><span>${n.title}</span><span style="color:${n.sentiment==='positive'?'#10b981':'#ef4444'}">${n.sentiment==='positive'?'Olumlu':'Olumsuz'}</span></div>`).join('')}<div style="margin-top:15px;background:#0f2c44;padding:15px;border-radius:12px;"><p>Duygu Skoru: <strong style="color:#f5b042;">%${Math.round(avg)} Olumlu</strong></p></div></div>`;
     }
     
-    // MODÜL 11: YÖNETİCİ PANELİ
     function renderAdmin() {
-        if (!isAdmin) return `<div class="card"><p style="color:#ef4444;">Bu sayfaya erişim yetkiniz yok. Admin girişi yapın.</p></div>`;
-        let totalVolume = assets.reduce((s,a) => s + (a.volume || 0), 0);
-        return `
-            <div class="card">
-                <h3 style="color:#f5b042; font-weight: bold; margin-bottom: 15px;">👑 Yönetici Paneli</h3>
-                <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:15px; margin-bottom:20px;">
-                    <div style="background:#0f2c44; padding:15px; border-radius:12px; text-align:center;">
-                        <p style="color:#9ca3af;">Toplam Kullanıcı</p>
-                        <h2 style="color:#f5b042;">${users.length}</h2>
-                    </div>
-                    <div style="background:#0f2c44; padding:15px; border-radius:12px; text-align:center;">
-                        <p style="color:#9ca3af;">Toplam Varlık</p>
-                        <h2 style="color:#f5b042;">${assets.length}</h2>
-                    </div>
-                    <div style="background:#0f2c44; padding:15px; border-radius:12px; text-align:center;">
-                        <p style="color:#9ca3af;">İşlem Hacmi</p>
-                        <h2 style="color:#f5b042;">${(totalVolume/1000).toFixed(0)}K</h2>
-                    </div>
-                    <div style="background:#0f2c44; padding:15px; border-radius:12px; text-align:center;">
-                        <p style="color:#9ca3af;">Başarı Oranı</p>
-                        <h2 style="color:#f5b042;">%68</h2>
-                    </div>
-                </div>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:15px;">
-                    <div style="background:#0f2c44; padding:15px; border-radius:12px;">
-                        <p style="color:#f5b042;">📈 En Karlı Varlık</p>
-                        <h2 style="color:#10b981;">ALTIN</h2>
-                        <p style="color:#9ca3af; font-size:12px;">+%18.2 (YTD)</p>
-                    </div>
-                    <div style="background:#0f2c44; padding:15px; border-radius:12px;">
-                        <p style="color:#f5b042;">⚠️ En Riskli Varlık</p>
-                        <h2 style="color:#ef4444;">BITCOIN</h2>
-                        <p style="color:#9ca3af; font-size:12px;">Volatilite: %45</p>
-                    </div>
-                </div>
-                <button onclick="openAdminPanel()" class="btn-gold" style="width:100%;">+ Varlık Yönetimine Git</button>
-            </div>
-        `;
+        if (!isAdmin) return `<div class="card"><p style="color:red;">Yetkiniz yok.</p></div>`;
+        return `<div class="card"><h3 style="color:#f5b042;font-weight:bold;margin-bottom:15px;">👑 Yönetici</h3><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-bottom:20px;"><div style="background:#0f2c44;padding:15px;border-radius:12px;"><p>Kullanıcı</p><h2 style="color:#f5b042;">${users.length}</h2></div><div style="background:#0f2c44;padding:15px;border-radius:12px;"><p>Varlık</p><h2 style="color:#f5b042;">${assets.length}</h2></div></div><button onclick="openAdminPanel()" class="btn-gold" style="width:100%;">Yönetim</button></div>`;
     }
     
-    // MODÜL 12: RAPORLAR
     function renderReports() {
-        let totalProfit = 8.5;
-        return `
-            <div class="card">
-                <h3 style="color:#f5b042; font-weight: bold; margin-bottom: 15px;">📑 Raporlar & Geçmiş</h3>
-                <div style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-bottom:15px;">
-                    <button onclick="showToast('PDF raporu hazırlanıyor...')" class="btn-gold" style="width:100%;"><i class="fas fa-file-pdf"></i> PDF Raporu İndir</button>
-                    <button onclick="whatsappLink('Günlük rapor talebi')" class="btn-gold" style="width:100%;"><i class="fab fa-whatsapp"></i> WhatsApp ile Gönder</button>
-                </div>
-                <div style="background:#0f2c44; padding:15px; border-radius:12px;">
-                    <p style="color:#f5b042;">📊 30 Günlük Performans Özeti</p>
-                    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:10px;">
-                        <div style="text-align:center;">
-                            <p style="color:#9ca3af; font-size:12px;">Toplam Getiri</p>
-                            <p style="color:#10b981; font-size:20px; font-weight:bold;">+%${totalProfit}</p>
-                        </div>
-                        <div style="text-align:center;">
-                            <p style="color:#9ca3af; font-size:12px;">Maks. Düşüş</p>
-                            <p style="color:#ef4444; font-size:20px; font-weight:bold;">-2.1%</p>
-                        </div>
-                        <div style="text-align:center;">
-                            <p style="color:#9ca3af; font-size:12px;">Sharpe Oranı</p>
-                            <p style="color:#f5b042; font-size:20px; font-weight:bold;">1.42</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
+        return `<div class="card"><h3 style="color:#f5b042;font-weight:bold;margin-bottom:15px;">📑 Raporlar</h3><button onclick="showToast('PDF hazırlanıyor...')" class="btn-gold" style="width:100%;margin-bottom:10px;">📥 PDF İndir</button><button onclick="whatsappLink('Rapor talebi')" class="btn-gold" style="width:100%;">📧 WhatsApp Gönder</button></div>`;
     }
     
-    // MODÜL 13: ABONELİK (4 PAKET)
     function renderPricing() {
-        return `
-            <div class="card">
-                <h3 style="color:#f5b042; font-weight: bold; margin-bottom: 20px;">📦 4 Abonelik Paketi</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap: 20px;">
-                    ${plans.map(p => `
-                        <div style="background: #0f2c44; border-radius: 16px; padding: 20px; text-align: center; ${p.popular ? 'border: 2px solid #f5b042;' : ''}">
-                            ${p.popular ? '<div style="background:#f5b042; color:#0a0f2c; font-size:12px; padding:4px 12px; border-radius:999px; display:inline-block; margin-bottom:10px;">Popüler</div>' : ''}
-                            <i class="fas ${p.icon}" style="color:#f5b042; font-size:32px;"></i>
-                            <h3 style="color:#f5b042; font-size: 22px; margin-top:10px;">${p.name}</h3>
-                            <p style="color:white; font-size: 28px; margin: 15px 0;">${formatMoney(p.price)}<span style="font-size:12px;">/ay</span></p>
-                            <ul style="text-align: left; color:#9ca3af; margin: 15px 0;">
-                                ${p.features.map(f => `<li style="margin:5px 0;"><i class="fas fa-check" style="color:#f5b042;"></i> ${f}</li>`).join('')}
-                            </ul>
-                            <button onclick="upgradeSubscription('${p.name}')" class="btn-gold" style="width:100%;"><i class="fab fa-whatsapp mr-2"></i>WhatsApp ile Satın Al</button>
-                        </div>
-                    `).join('')}
-                </div>
-                <p style="color:#9ca3af; font-size:12px; text-align:center; margin-top:15px;">Tüm paketlerde 7 gün para iade garantisi.</p>
-            </div>
-        `;
+        return `<div class="card"><h3 style="color:#f5b042;font-weight:bold;margin-bottom:20px;">📦 4 Abonelik Paketi</h3><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;">${plans.map(p => `<div style="background:#0f2c44;border-radius:16px;padding:20px;text-align:center;${p.popular?'border:2px solid #f5b042;':''}">${p.popular?'<div style="background:#f5b042;color:#0a0f2c;font-size:12px;padding:4px 12px;border-radius:999px;display:inline-block;margin-bottom:10px;">Popüler</div>':''}<i class="fas ${p.icon}" style="color:#f5b042;font-size:32px;"></i><h3 style="color:#f5b042;font-size:22px;margin-top:10px;">${p.name}</h3><p style="color:white;font-size:28px;margin:15px 0;">${formatMoney(p.price)}<span style="font-size:12px;">/ay</span></p><ul style="text-align:left;color:#9ca3af;margin:15px 0;">${p.features.map(f => `<li style="margin:5px 0;"><i class="fas fa-check" style="color:#f5b042;"></i> ${f}</li>`).join('')}</ul><button onclick="upgradeSubscription('${p.name}')" class="btn-gold" style="width:100%;"><i class="fab fa-whatsapp mr-2"></i>Satın Al</button></div>`).join('')}</div></div>`;
     }
     
-    // ============================================================
-    // 8. MENÜ VE RENDER
-    // ============================================================
+    // ============ MENÜ ============
     const menuItems = [
         { id: "overview", icon: "fa-chart-pie", label: "Genel Bakış" },
         { id: "assets", icon: "fa-chart-line", label: "Varlık İzleme" },
@@ -599,9 +241,9 @@
         { id: "ai", icon: "fa-robot", label: "AI Tahminleri" },
         { id: "signals", icon: "fa-bullhorn", label: "AI Sinyaller" },
         { id: "risk", icon: "fa-shield-alt", label: "Risk Yönetimi" },
-        { id: "portfolio", icon: "fa-chart-simple", label: "Portföy Optimizasyonu" },
+        { id: "portfolio", icon: "fa-chart-simple", label: "Portföy" },
         { id: "alerts", icon: "fa-bell", label: "Erken Uyarı" },
-        { id: "macro", icon: "fa-globe", label: "Makro Ekonomi" },
+        { id: "macro", icon: "fa-globe", label: "Makro" },
         { id: "news", icon: "fa-newspaper", label: "Haber & Duygu" },
         { id: "pricing", icon: "fa-tag", label: "Abonelik" },
         { id: "admin", icon: "fa-crown", label: "Yönetici" },
@@ -609,53 +251,11 @@
     ];
     
     function renderSidebar() {
-        return `
-            <div class="sidebar">
-                <div style="display:flex; align-items:center; gap:10px; margin-bottom:30px;">
-                    <div style="background:#f5b042; width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center;">
-                        <i class="fas fa-robot" style="color:#0a0f2c;"></i>
-                    </div>
-                    <h1 style="color:#f5b042; font-size:24px;">Yatırım AI</h1>
-                </div>
-                ${menuItems.map(item => `
-                    <div onclick="window.currentPage='${item.id}'; render();" class="menu-item ${currentPage === item.id ? 'menu-active' : ''}">
-                        <i class="fas ${item.icon}"></i>
-                        <span>${item.label}</span>
-                    </div>
-                `).join('')}
-                <div style="margin-top:40px; padding-top:20px; border-top:1px solid #1e2556;">
-                    ${!currentUser ? 
-                        `<button onclick="openLoginModal()" class="btn-gold" style="width:100%;">Giriş Yap / Kayıt Ol</button>` : 
-                        `<div style="display:flex; align-items:center; gap:10px;">
-                            <div style="background:#f5b042; width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center;">
-                                <span style="color:#0a0f2c; font-weight:bold;">${currentUser.name[0]}</span>
-                            </div>
-                            <div>
-                                <strong style="color:white;">${currentUser.name}</strong>
-                                <br><span style="color:#f5b042; font-size:12px;">${currentUser.role === 'admin' ? 'Yönetici' : 'Kullanıcı'}</span>
-                            </div>
-                            <button onclick="handleLogout()" style="margin-left:auto; background:#ef4444; color:white; border:none; border-radius:8px; padding:5px 10px; cursor:pointer;">Çıkış</button>
-                        </div>`
-                    }
-                </div>
-            </div>
-        `;
+        return `<div class="sidebar"><div style="display:flex;align-items:center;gap:10px;margin-bottom:30px;"><div style="background:#f5b042;width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;"><i class="fas fa-robot" style="color:#0a0f2c;"></i></div><h1 style="color:#f5b042;font-size:24px;">Yatırım AI</h1></div>${menuItems.map(item => `<div onclick="window.currentPage='${item.id}'; render();" class="menu-item ${currentPage===item.id?'menu-active':''}"><i class="fas ${item.icon}"></i><span>${item.label}</span></div>`).join('')}<div style="margin-top:40px;padding-top:20px;border-top:1px solid #1e2556;">${!currentUser?`<button onclick="openLoginModal()" class="btn-gold" style="width:100%;">Giriş Yap</button>`:`<div style="display:flex;align-items:center;gap:10px;"><div style="background:#f5b042;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;"><span style="color:#0a0f2c;font-weight:bold;">${currentUser.name[0]}</span></div><div><strong style="color:white;">${currentUser.name}</strong><br><span style="color:#f5b042;font-size:12px;">${currentUser.role==='admin'?'Yönetici':'Kullanıcı'}</span></div><button onclick="handleLogout()" style="margin-left:auto;background:#ef4444;color:white;border:none;border-radius:8px;padding:5px 10px;cursor:pointer;">Çıkış</button></div>`}</div></div>`;
     }
     
     function renderFooter() {
-        return `
-            <div class="footer">
-                <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:20px; margin-bottom:10px;">
-                    <span><i class="fas fa-user-circle" style="color:#f5b042;"></i> CFO.MÜH. Orhan BOYRAZ</span>
-                    <span><i class="fab fa-whatsapp" style="color:#f5b042;"></i> 0541 866 0202</span>
-                    <span><i class="fas fa-phone" style="color:#f5b042;"></i> 05409666602</span>
-                    <span><i class="fas fa-envelope" style="color:#f5b042;"></i> orhanboyraz0216@gmail.com</span>
-                    <span><i class="fas fa-map-marker-alt" style="color:#f5b042;"></i> Nilüfer / BURSA</span>
-                    <span><i class="fas fa-globe" style="color:#f5b042;"></i> anadolunetwork.tr</span>
-                </div>
-                <p style="color:#9ca3af;">© 2025 Yatırım AI – Yapay Zeka Destekli Yatırım Platformu | Yatırım tavsiyesi değildir.</p>
-            </div>
-        `;
+        return `<div class="footer"><div style="display:flex;flex-wrap:wrap;justify-content:center;gap:20px;margin-bottom:10px;"><span><i class="fas fa-user-circle text-gold"></i> CFO.MÜH. Orhan BOYRAZ</span><span><i class="fab fa-whatsapp text-gold"></i> 0541 866 0202</span><span><i class="fas fa-phone text-gold"></i> 05409666602</span><span><i class="fas fa-envelope text-gold"></i> orhanboyraz0216@gmail.com</span><span><i class="fas fa-map-marker-alt text-gold"></i> Nilüfer / BURSA</span><span><i class="fas fa-globe text-gold"></i> anadolunetwork.tr</span></div><p>© 2025 Yatırım AI – Yatırım tavsiyesi değildir.</p></div>`;
     }
     
     function render() {
@@ -674,39 +274,17 @@
         else if (currentPage === "reports") content = renderReports();
         else if (currentPage === "pricing") content = renderPricing();
         else content = renderOverview();
-        
-        document.getElementById("app").innerHTML = `
-            <div style="display:flex;">
-                ${renderSidebar()}
-                <div class="main">
-                    ${content}
-                    ${renderFooter()}
-                </div>
-            </div>
-        `;
-        
+        document.getElementById("app").innerHTML = `<div style="display:flex;">${renderSidebar()}<div class="main">${content}${renderFooter()}</div></div>`;
         setTimeout(() => {
             if (currentPage === "technical") { let ctx = document.getElementById('techChart')?.getContext('2d'); if(ctx) new Chart(ctx, { type: 'line', data: { labels: ['1G','2G','3G','4G','5G','6G'], datasets: [{ label: 'ALTIN', data: [3300,3320,3340,3360,3350,3365], borderColor: '#f5b042', fill: false }] } }); }
             if (currentPage === "portfolio") { let ctx = document.getElementById('portfolioChart')?.getContext('2d'); if(ctx) new Chart(ctx, { type: 'doughnut', data: { labels: ['Altın','Hisse','ETF','Tahvil','Nakit','Kripto','Alternatif'], datasets: [{ data: [25,20,15,15,10,10,5], backgroundColor: ['#f5b042','#e09d2c','#d48a1f','#c27818','#b0680d','#a05a10','#904c0a'] }] } }); }
         }, 100);
     }
     
-    // ============================================================
-    // 9. BAŞLAT
-    // ============================================================
     let saved = localStorage.getItem("user");
-    if (saved) {
-        try { 
-            currentUser = JSON.parse(saved);
-            isAdmin = currentUser.role === "admin";
-            window.currentUser = currentUser;
-        } catch(e) {}
-    }
+    if (saved) { try { currentUser = JSON.parse(saved); isAdmin = currentUser.role === "admin"; } catch(e) {} }
     window.currentPage = currentPage;
     window.render = render;
-    window.addAsset = addAsset;
-    window.deleteAsset = deleteAsset;
-    window.whatsappLink = whatsappLink;
     window.openLoginModal = openLoginModal;
     window.handleLogout = handleLogout;
     window.openAdminPanel = openAdminPanel;
